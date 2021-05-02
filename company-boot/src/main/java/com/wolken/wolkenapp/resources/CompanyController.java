@@ -37,24 +37,69 @@ public class CompanyController {
 	@Transactional
 	public String save(@RequestBody CompanyEntity entity) {
 		logger.info("inside save method inside resources");
-		return companyService.save(entity);
+		try {
+			logger.info("inside try block inside save method inside resources");
+			return companyService.save(entity);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			logger.info("inside catch block inside save method inside resources");
+			e.printStackTrace();
+		}
+		logger.error(" returning null inside save method inside resources");
+		return null;
 		
 	}
-	@PutMapping("/update")
+	@PutMapping("/update/{id}")
 	@CrossOrigin
-	public String updateByUserName(@RequestBody CompanyEntity entity) {
+	public String updateByUserName(@PathVariable int id ,@RequestBody CompanyEntity entity) {
 		logger.info("inside update by user name inside resources");
-		return companyService.updateByUserName(entity);
+		try {
+			logger.info("inside try block inside update by user name inside resources");
+			return companyService.updateByUserName(id,entity);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			logger.info("inside catch block inside update by user name inside resources");
+			e.printStackTrace();
+		}
+		logger.error(" returning null inside update by user name inside resources");
+		return null;
 		
 	}
-	@DeleteMapping("/delete")
+	
+	@GetMapping("/searchid/{id}")
+	@CrossOrigin
+	public CompanyEntity searchId(@PathVariable int id){
+		logger.info("inside search id inside resources");
+		try {
+			logger.info("inside try block inside search id inside resources");
+			return companyService.validateAndSearch(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			logger.info("inside catch block inside search id inside resources");
+			e.printStackTrace();
+		}
+		logger.info("returning null inside search id inside resources");
+		return null;
+	}
+	
+	@GetMapping("/delete/{userName}")
 	@CrossOrigin
 	@Transactional
-	public String deleteByUserName(@RequestBody CompanyEntity entity) {
-		logger.info("delete by team name inside resources");
-		return companyService.validateAndDeleteByUserName(entity);
-		
+	public Iterable<CompanyEntity> deleteUser(@PathVariable String userName){
+		logger.info("inside delete inside resources");
+		return companyService.validateAndDeleteByUserName(userName);
 	}
+	/*
+	 * @DeleteMapping("/delete")
+	 * 
+	 * @CrossOrigin
+	 * 
+	 * @Transactional public String deleteByUserName(@RequestBody CompanyEntity
+	 * entity) { logger.info("delete by team name inside resources"); return
+	 * companyService.validateAndDeleteByUserName(entity);
+	 * 
+	 * }
+	 */
 	
 
 }

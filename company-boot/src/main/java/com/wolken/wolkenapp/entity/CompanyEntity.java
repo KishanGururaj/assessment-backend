@@ -32,5 +32,6 @@ public class CompanyEntity {
 	private String password;
 	@Transient
 	private String confirmPassword;
+	
 
 }

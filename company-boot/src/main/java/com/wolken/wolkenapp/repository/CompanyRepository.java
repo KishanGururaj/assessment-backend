@@ -7,5 +7,8 @@ import com.wolken.wolkenapp.entity.CompanyEntity;
 @Repository
 public interface CompanyRepository extends JpaRepository<CompanyEntity, Integer> {
 	public CompanyEntity findByUserName(String userName);
+
+	public Iterable<CompanyEntity> deleteByUserName(String userName);
+	public CompanyEntity findById(int id);
 }
 	
